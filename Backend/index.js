@@ -19,7 +19,7 @@ import { google } from 'googleapis';
 import setupSocket from "./socket.js";
 const app=express();
 const testPassword = 'userpassword';
-const port=process.env.PORT||3000;
+const port=process.env.PORT;
 const saltRounds = 10;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 env.config();
