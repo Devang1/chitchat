@@ -94,7 +94,7 @@ const Auth = () => {
           }).then((response)=>{
             if(response.data!="user already exists"){
               navigate("/profile");  // Redirect after successful login
-              setcheck(true);
+            await  setcheck(true);
               fetchUser()}
           else{
             userexists();
@@ -122,7 +122,7 @@ const handleLogin = async (event) => {
   
       await setuserinfo(response.data.user);  // Update state
       navigate("/profile");  // Redirect after successful login
-      setcheck(true); 
+     await setcheck(true); 
     } catch (err) {
       console.error("Login failed:", err.response?.data?.error || err.message);
       setlogerr(true);
