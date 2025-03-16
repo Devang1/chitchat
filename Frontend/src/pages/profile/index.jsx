@@ -105,6 +105,7 @@ const Profile = () => {
     setImage(`/api/image/${userinfo.id}`)
     const imageFile = new File([userinfo.image], "image.png", { type: "image/png" });
     setSelectedFile(imageFile);
+    console.log(userinfo);
   },[]);
     return (
       <div className="w-[100vw] h-[100vh] flex flex-col gap-10 items-center justify-center bg-[#121212] relative md:flex-row md:gap-60">
@@ -125,7 +126,7 @@ const Profile = () => {
         ) : (
           <div className="w-32 h-32 flex items-center justify-center border rounded-full ml-15 md:ml-17 md:w-42 md:h-42 bg-[#253D4C] text-white border-[#5BC6DF] relative">
            <h2 className="absolute top-[50] font-bold "> Upload Image</h2>
-           <h1 className="text-8xl font-bold text-[#5BC6DF]">{userinfo.email.charAt(0).toUpperCase()}</h1>
+           <h1 className="text-xl font-bold text-[#5BC6DF]">{Enter the image}</h1>
           </div>
         )}
         <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" name="image" id="image" />
