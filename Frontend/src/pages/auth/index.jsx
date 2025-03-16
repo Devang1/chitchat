@@ -31,7 +31,6 @@ const Auth = () => {
     //             setuserData(response.data);
     //     })
     // })
-    console.log(userinfo);
     const passnotmatch = () => {
       event.preventDefault();
       toast.error('Both passwords are not same!', {
@@ -70,9 +69,8 @@ const Auth = () => {
             await axios.get('/api/isAuth', {
               withCredentials: true, 
             }).then((response)=>{
-                console.log(response.data);
             if(response.data!="not authenticated"){
-                  await  setuserinfo(response.data);
+                  setuserinfo(response.data);
             }else{
                 navigate("/")
             }
@@ -83,9 +81,7 @@ const Auth = () => {
         };
     const handleRegistration=async(event)=>{
         event.preventDefault();
-
         if(email!=""&&password!="" && password===cpassword){
-          
       axios.post("/api/register",{
             email: email,
             password: password,
@@ -94,7 +90,7 @@ const Auth = () => {
           }).then((response)=>{
             if(response.data!="user already exists"){
               navigate("/profile");  // Redirect after successful login
-            await  setcheck(true);
+            setcheck(true);
               fetchUser()}
           else{
             userexists();
@@ -120,7 +116,7 @@ const handleLogin = async (event) => {
         }
       );
   
-      await setuserinfo(response.data.user);  // Update state
+      setuserinfo(response.data.user);  // Update state
       navigate("/profile");  // Redirect after successful login
      await setcheck(true); 
     } catch (err) {
