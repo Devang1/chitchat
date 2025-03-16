@@ -72,7 +72,7 @@ const Auth = () => {
             }).then((response)=>{
                 console.log(response.data);
             if(response.data!="not authenticated"){
-                    setuserinfo(response.data);
+                  await  setuserinfo(response.data);
             }else{
                 navigate("/")
             }
@@ -120,7 +120,7 @@ const handleLogin = async (event) => {
         }
       );
   
-      setuserinfo(response.data.user);  // Update state
+      await setuserinfo(response.data.user);  // Update state
       navigate("/profile");  // Redirect after successful login
       setcheck(true); 
     } catch (err) {
