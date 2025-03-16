@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy:{
       "/api": {
-        target: "http://localhost:3000", // Replace with your actual backend URL
+        target: "https://chitchat2.onrender.com", // Replace with your actual backend URL
         changeOrigin: true,
         secure: false, // Set to true if using HTTPS
       },
