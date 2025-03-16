@@ -13,7 +13,7 @@ db.connect();
 const setupSocket=(server)=>{
     const io=new socketIOserver(server,{
         cors:{
-            origin:"https://chitchat3.onrender.com/",
+            origin:"https://chitchat3.onrender.com",
             methods:["GET","POST"],
             credentials:true
         }
