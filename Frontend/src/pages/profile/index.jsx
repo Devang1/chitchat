@@ -126,7 +126,7 @@ const Profile = () => {
         ) : (
           <div className="w-32 h-32 flex items-center justify-center border rounded-full ml-15 md:ml-17 md:w-42 md:h-42 bg-[#253D4C] text-white border-[#5BC6DF] relative">
            <h2 className="absolute top-[50] font-bold "> Upload Image</h2>
-           <h1 className="text-xl font-bold text-[#5BC6DF]">{Enter the image}</h1>
+           <h1 className="text-xl font-bold text-[#5BC6DF]">{"Enter the image"}</h1>
           </div>
         )}
         <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" name="image" id="image" />
