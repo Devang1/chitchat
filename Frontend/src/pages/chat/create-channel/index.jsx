@@ -6,8 +6,7 @@ export default function GroupCreator() {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [allcontacts, setAllcontacts] = useState([]);
-  const{channel,setchannel}=useappstore();
-  const {userinfo} =useappstore();
+  const{userinfo,channel,setchannel}=useappstore();
   const getcontacts=async()=>{
     const fetched_contacts=await axios.get('/api/contacts', {
       params: { email:userinfo.email },
