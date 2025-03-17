@@ -9,7 +9,7 @@ export default defineConfig({
       "/api": {
         target: "https://chitchat2.onrender.com", // Replace with your actual backend URL
         changeOrigin: true,
-        secure: false, // Set to true if using HTTPS
+        secure: true, // Set to true if using HTTPS
       },
     }
   },
