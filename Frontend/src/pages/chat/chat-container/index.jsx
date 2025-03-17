@@ -275,7 +275,7 @@ function ChatContainer() {
                 <div className="my-4 relative" key={index}>
                 <div
                   key={index}
-                  className={`p-2  my-2 max-w-[40vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
+                  className={`p-2  my-2 max-w-[60vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
                     msg.sender === userinfo.id
                       ? "ml-auto bg-cyan-600"
                       : "bg-gray-700"
@@ -395,8 +395,8 @@ function ChatContainer() {
         >
           {imgclick && (
         <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center" >
-          <i className="fa-solid fa-xmark text-4xl absolute top-15 right-15 cursor-pointer text-cyan-600" onClick={() => setimgclick(null)}></i>
-          <i className="fa-solid fa-download text-3xl absolute top-15 right-30 cursor-pointer text-cyan-600" onClick={downloadImage}></i>
+          <i className="fa-solid fa-xmark text-4xl absolute top-15 right-15 cursor-pointer text-cyan-600 drop-shadow-md" onClick={() => setimgclick(null)}></i>
+          <i className="fa-solid fa-download text-3xl absolute top-15 right-30 cursor-pointer text-cyan-600 drop-shadow-md" onClick={downloadImage}></i>
           <img src={imgclick} alt="Preview" className="max-w-full max-h-full"  />
         </div>
       )}
@@ -427,7 +427,7 @@ function ChatContainer() {
                 <div className="my-4 relative" key={index}>
                 <div
                   key={index}
-                  className={`p-2  my-2 max-w-[40vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
+                  className={`p-2  my-2 max-w-[60vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
                     msg.sender === userinfo.id
                       ? "ml-auto bg-cyan-600"
                       : "bg-gray-700"
