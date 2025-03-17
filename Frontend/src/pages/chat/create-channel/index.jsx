@@ -45,7 +45,7 @@ export default function GroupCreator() {
     setSelectedUsers([]);
   };
   const filteredUsers = allcontacts.filter((user) =>
-    user.firstname.toLowerCase().includes(search.toLowerCase())
+    user.firstname?.toLowerCase().includes(search?.toLowerCase()||"")
   );
 
   return (
