@@ -70,7 +70,7 @@ function ContactsContainer() {
   },[channel,getchannels]);
   useEffect(() => {
     setcontacts([]);
-    setcontacts(Totalcontacts.filter((contact) => contact.firstname.startsWith(search)));
+    setcontacts(Totalcontacts.filter((contact) => contact.firstname?.startsWith(search)));
   }, [search,Totalcontacts]);
   const deleteChannel=async(channel)=>{
     const response=axios.post("https://chitchat2.onrender.com/api/deletechannel",{
