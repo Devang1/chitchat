@@ -275,7 +275,7 @@ function ChatContainer() {
                 <div className="my-4 relative" key={index}>
                 <div
                   key={index}
-                  className={`p-2  my-2 max-w-[30vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
+                  className={`p-2  my-2 max-w-[40vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
                     msg.sender === userinfo.id
                       ? "ml-auto bg-cyan-600"
                       : "bg-gray-700"
@@ -427,7 +427,7 @@ function ChatContainer() {
                 <div className="my-4 relative" key={index}>
                 <div
                   key={index}
-                  className={`p-2  my-2 max-w-[30vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
+                  className={`p-2  my-2 max-w-[40vw] md:max-w-[19vw] h-auto flex items-center justify-center  ${
                     msg.sender === userinfo.id
                       ? "ml-auto bg-cyan-600"
                       : "bg-gray-700"
