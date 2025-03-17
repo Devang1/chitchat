@@ -56,6 +56,7 @@ app.get("/",(req,res)=>{
     res.send("hello");
 })
 app.get("/api/isAuth",async(req,res)=>{
+  console.log("hello chal rha hu")
   if(req.isAuthenticated()){
     const mail=req.user.email;
     const Bdata= await db.query("SELECT * FROM users WHERE email = $1", [
