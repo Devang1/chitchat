@@ -56,9 +56,9 @@ const Profile = () => {
     }
   }
   };
-  const {userinfo,setuserinfo}=useappstore();
+  const {userinfo,setuserinfo,check}=useappstore();
+  
   const navigate=useNavigate();
-  const{check}=useappstore();
   const [image, setImage] = useState(null);
   const [first, setfirst] = useState('');
   const [last, setlast] = useState('');
