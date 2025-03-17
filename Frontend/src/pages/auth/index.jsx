@@ -70,7 +70,7 @@ const Auth = () => {
             }).then((response)=>{
             if(response.data!="not authenticated"){
                   setuserinfo(response.data);
-                console.log(response.data);
+                console.log("data:",response.data);
             }else{
                 navigate("/")
             }
