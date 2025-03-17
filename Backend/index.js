@@ -25,7 +25,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 env.config();
 app.use(
   cors({
-    origin:"http://localhost:5173"||process.env.ORIGIN,
+    origin:"https://chitchat3.onrender.com",
     methods:["GET","POST","PUT","PATCH","DELETE"],
     credentials:true,
   })
