@@ -8,7 +8,7 @@ export default function GroupCreator() {
   const [allcontacts, setAllcontacts] = useState([]);
   const{userinfo,channel,setchannel}=useappstore();
   const getcontacts=async()=>{
-    const fetched_contacts=await axios.get('/api/contacts', {
+    const fetched_contacts=await axios.get('https://chitchat2.onrender.com/api/contacts', {
       params: { email:userinfo.email },
       withCredentials: true, 
     })
@@ -26,14 +26,14 @@ export default function GroupCreator() {
   };
 
   const handleCreateGroup = () => {
-    axios.post("/api/group",{
+    axios.post("https://chitchat2.onrender.com/api/group",{
       name:groupName ,
       admin: userinfo.id,
     }, {
       headers: { 'Content-Type': 'application/json' },
     }).then((response)=>{
       selectedUsers.map((mem)=>(
-      axios.post("/api/addmember",{
+      axios.post("https://chitchat2.onrender.com/api/addmember",{
         group:response.data.channel_id,
         member:mem,
       },{
@@ -81,7 +81,7 @@ export default function GroupCreator() {
               onChange={() => toggleUser(user.id)}
               className="accent-[#00bcd4]"
             />
-            <img src={user.image? `/api/image/${user.id}`:user.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
+            <img src={user.image? `https://chitchat2.onrender.com/api/image/${user.id}`:user.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
             <strong className="text-cyan-300 ">{`${user.firstname} ${user.lastname!=null?user.lastname:""}`}</strong>
           </label>
         ))}
