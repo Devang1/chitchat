@@ -12,7 +12,7 @@ function ContactsContainer() {
   const[imageUrl,setimageUrl]=useState(null)
   const[channels,setchannels]=useState([]);
   const logout=async()=>{
-    await axios.get('/api/logout', {
+    await axios.get('https://chitchat2.onrender.com/api/logout', {
       withCredentials: true, 
     }).then((response)=>{
       if(response.data=="logout"){
@@ -27,7 +27,7 @@ function ContactsContainer() {
   };
   const getcontacts = useCallback(async () => {
     try {
-      const fetched_contacts = await axios.get("/api/contacts", {
+      const fetched_contacts = await axios.get("https://chitchat2.onrender.com/api/contacts", {
         params: { email: userinfo.email },
         withCredentials: true,
       });
@@ -39,7 +39,7 @@ function ContactsContainer() {
   }, [userinfo.email]); 
   const getchannels = useCallback(async () => {
     try {
-      const fetched_channels = await axios.get("/api/getchannels", {
+      const fetched_channels = await axios.get("https://chitchat2.onrender.com/api/getchannels", {
         params: { member: userinfo.id },
         withCredentials: true,
       });
@@ -58,7 +58,7 @@ function ContactsContainer() {
   }
   useEffect(()=>{
     let defaultimg=userinfo.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
-    let tempimageUrl = userinfo.image? `/api/image/${userinfo.id}`:defaultimg;
+    let tempimageUrl = userinfo.image? `https://chitchat2.onrender.com/api/image/${userinfo.id}`:defaultimg;
     setimageUrl(tempimageUrl);
   },[userinfo]);
   useEffect(()=>{
@@ -73,7 +73,7 @@ function ContactsContainer() {
     setcontacts(Totalcontacts.filter((contact) => contact.firstname.startsWith(search)));
   }, [search,Totalcontacts]);
   const deleteChannel=async(channel)=>{
-    const response=axios.post("/api/deletechannel",{
+    const response=axios.post("https://chitchat2.onrender.com/api/deletechannel",{
       channelId:channel
     }, {
       headers: { 'Content-Type': 'application/json' },
@@ -100,7 +100,7 @@ function ContactsContainer() {
         <ul className="mt-4 space-y-2 overflow-y-scroll  h-[30vh] ">
           {contacts.length>0?(contacts.map((chat, index) => (
             <li key={index} className="p-2 bg-gray-800 rounded-xl hover:bg-cyan-400/20 transition flex items-center gap-2" onClick={()=>{handelContactClick(chat)}}>
-              <img src={chat.image? `/api/image/${chat.id}`:chat.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
+              <img src={chat.image? `https://chitchat2.onrender.com/api/image/${chat.id}`:chat.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
               <strong className="text-cyan-300 ">{`${chat.firstname} ${chat.lastname!=null?chat.lastname:""}`}</strong>
             </li>
           ))):<h1>User not found</h1>}
