@@ -15,8 +15,8 @@ const Auth = () => {
     const navigate=useNavigate();
     useEffect(()=>{
         const checkKarlo=async()=>{
-            console.log(check)
-            if(check===true && userinfo.profilesetup==true){
+            console.log(check,userinfo)
+            if(check===true && userinfo?.profilesetup==true){
                 navigate("/chat");
             }
             else if(check==true){
@@ -70,6 +70,7 @@ const Auth = () => {
             }).then((response)=>{
             if(response.data!="not authenticated"){
                   setuserinfo(response.data);
+                console.log(response.data);
             }else{
                 navigate("/")
             }
