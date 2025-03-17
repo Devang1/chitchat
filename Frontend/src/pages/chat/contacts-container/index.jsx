@@ -5,13 +5,11 @@ import { Toaster, toast } from 'sonner';
 import axios from "axios";
 function ContactsContainer() {
   const navigate=useNavigate();
-  const {userinfo,setselectedChatType,selectedChatType,setselectedChatData} =useappstore();
-  const{check,setcheck}=useappstore();
+  const {userinfo,setselectedChatType,selectedChatType,setselectedChatData,check,setcheck,channel,setchannel,closeChat} =useappstore();
   const[Totalcontacts,setTotalcontacts]=useState([])
   const[contacts,setcontacts]=useState([])
   const[search,setsearch]=useState([])
   const[imageUrl,setimageUrl]=useState(null)
-  const{channel,setchannel,closeChat}=useappstore();
   const[channels,setchannels]=useState([]);
   const logout=async()=>{
     await axios.get('/api/logout', {
