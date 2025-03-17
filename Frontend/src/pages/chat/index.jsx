@@ -22,7 +22,7 @@ const Chat = () => {
   checkKarlo();
   },[userinfo,navigate,check]);
   const defaultimg=userinfo.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
-  const imageUrl = userinfo.image? `/api/image/${userinfo.id}`:defaultimg ;
+  const imageUrl = userinfo.image? `https://chitchat2.onrender.com/api/image/${userinfo.id}`:defaultimg ;
     return (
       <div className="flex h-[100vh] text-white overflow-hidden ">
         <ContactsContainer/>
