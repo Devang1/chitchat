@@ -71,6 +71,9 @@ function ContactsContainer() {
   useEffect(() => {
     setcontacts([]);
     setcontacts(Totalcontacts.filter((contact) => contact.firstname?.startsWith(search)));
+    setContacts(Totalcontacts.filter((contact) =>contact.firstname && contact.firstname.toLowerCase().startsWith(search.toLowerCase()))
+);
+
   }, [search,Totalcontacts]);
   const deleteChannel=async(channel)=>{
     const response=axios.post("https://chitchat2.onrender.com/api/deletechannel",{
