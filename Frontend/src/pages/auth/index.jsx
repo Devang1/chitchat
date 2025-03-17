@@ -90,8 +90,23 @@ const Auth = () => {
           }).then(async(response)=>{
             if(response.data!="user already exists"){
                 setcheck(true);
-                await fetchUser()
-              navigate("/profile");  // Redirect after successful login
+                try {
+      const response = await axios.post(
+        "https://chitchat2.onrender.com/api/log",  // Ensure correct backend URL
+        { email, password },
+        { 
+          withCredentials: true,  // Allows session cookies
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+      setuserinfo(response.data.user);  // Update state
+      navigate("/profile");  // Redirect after successful login
+     await setcheck(true); 
+    } catch (err) {
+      console.error("Login failed:", err.response?.data?.error || err.message);
+      setlogerr(true);
+    }
+  };
              }
           else{
             userexists();
