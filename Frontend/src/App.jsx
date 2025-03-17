@@ -89,7 +89,7 @@ function App() {
   const {userinfo,setuserinfo}=useappstore();
   useEffect(()=>{
     const getuser=async()=>{
-      const user=await axios.get('/api/isAuth', {
+      const user=await axios.get('https://chitchat2.onrender.com/api/isAuth', {
         withCredentials: true, 
       })
       console.log(user.data)
