@@ -89,9 +89,10 @@ const Auth = () => {
             headers: { 'Content-Type': 'application/json' },
           }).then((response)=>{
             if(response.data!="user already exists"){
+                setcheck(true);
+                fetchUser()
               navigate("/profile");  // Redirect after successful login
-            setcheck(true);
-              fetchUser()}
+             }
           else{
             userexists();
           }
