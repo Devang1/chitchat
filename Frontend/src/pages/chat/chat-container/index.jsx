@@ -284,7 +284,7 @@ function ChatContainer() {
                     <img
                       src={msg.file_url}
                       alt="image"
-                      className="rounded-4xl"
+                      className="w-[20vw] rounded-4xl"
                       onClick={() => handleImagePreview(msg.file_url)}
                     />
                  </div >
@@ -436,7 +436,7 @@ function ChatContainer() {
                     <img
                       src={msg.file_url}
                       alt="image"
-                      className="rounded-4xl"
+                      className="rounded-4xl w-[30vw]"
                       onClick={() => handleImagePreview(msg.file_url)}
                     />
                  </div >
