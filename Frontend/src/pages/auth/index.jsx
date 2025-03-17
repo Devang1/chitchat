@@ -65,7 +65,7 @@ const Auth = () => {
     };
         const fetchUser = async () => {
           try {
-            await axios.get('/api/isAuth', {
+            await axios.get('https://chitchat2.onrender.com/api/isAuth', {
               withCredentials: true, 
             }).then((response)=>{
             if(response.data!="not authenticated"){
@@ -82,7 +82,7 @@ const Auth = () => {
     const handleRegistration=async(event)=>{
         event.preventDefault();
         if(email!=""&&password!="" && password===cpassword){
-      axios.post("/api/register",{
+      axios.post("https://chitchat2.onrender.com/api/register",{
             email: email,
             password: password,
           }, {
@@ -108,7 +108,7 @@ const handleLogin = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "/api/log",  // Ensure correct backend URL
+        "https://chitchat2.onrender.com/api/log",  // Ensure correct backend URL
         { email, password },
         { 
           withCredentials: true,  // Allows session cookies
@@ -128,7 +128,7 @@ const handleLogin = async (event) => {
 
     const handleGoogle=(event)=>{
         event.preventDefault();
-        window.location.href = '/api/auth/google';
+        window.location.href = 'https://chitchat2.onrender.com/api/auth/google';
        console.log( fetchUser());
     }
   return (
