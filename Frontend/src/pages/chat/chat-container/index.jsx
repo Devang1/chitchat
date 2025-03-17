@@ -284,7 +284,7 @@ function ChatContainer() {
                     <img
                       src={msg.file_url}
                       alt="image"
-                      className="w-[20vw] rounded-4xl"
+                      className="w-[19vw] rounded-4xl"
                       onClick={() => handleImagePreview(msg.file_url)}
                     />
                  </div >
@@ -345,7 +345,7 @@ function ChatContainer() {
         <h3 className="text-lg font-bold text-cyan-400">Conversation Info</h3>
         <div className="mt-4">
           <h4 className="font-semibold text-cyan-300">Recent Photos</h4>
-          <div className="h-140 bg-gray-700 rounded my-2 shadow-md shadow-cyan-400/30 p-5">
+          <div className="h-140 bg-gray-700 rounded my-2 shadow-md shadow-cyan-400/30 p-5 overflow-hidden">
   {images.length === 0 ? (
     <h1>No image found</h1>
   ) : (
@@ -436,7 +436,7 @@ function ChatContainer() {
                     <img
                       src={msg.file_url}
                       alt="image"
-                      className="rounded-4xl w-[30vw]"
+                      className="rounded-4xl w-[19vw]"
                       onClick={() => handleImagePreview(msg.file_url)}
                     />
                  </div >
@@ -497,7 +497,7 @@ function ChatContainer() {
         <h3 className="text-lg font-bold text-cyan-400">Conversation Info</h3>
         <div className="mt-4">
           <h4 className="font-semibold text-cyan-300">Recent Photos</h4>
-          <div className="h-140 bg-gray-700 rounded my-2 shadow-md shadow-cyan-400/30 p-5">
+          <div className="h-140 bg-gray-700 rounded my-2 shadow-md shadow-cyan-400/30 p-5 overflow-hidden">
   {images.length === 0 ? (
     <h1>No image found</h1>
   ) : (
