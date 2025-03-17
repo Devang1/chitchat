@@ -7,9 +7,9 @@ import EmptyChatContainer from "./empty-chat-container";
 import ContactsContainer from "./contacts-container";
 import GroupCreator from './create-channel';
 const Chat = () => {
-  const {userinfo} =useappstore();
+  const {userinfo,check,channel,selectedChatType} =useappstore();
   const navigate=useNavigate();
-  const{check,channel}=useappstore();
+
   useEffect(()=>{
     const checkKarlo=async()=>{
       if(check==false){
@@ -21,7 +21,6 @@ const Chat = () => {
   }
   checkKarlo();
   },[userinfo,navigate,check]);
-  const {selectedChatType} =useappstore();
   const defaultimg=userinfo.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
   const imageUrl = userinfo.image? `/api/image/${userinfo.id}`:defaultimg ;
     return (
