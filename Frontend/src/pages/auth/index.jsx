@@ -90,7 +90,7 @@ const Auth = () => {
           }).then(async(response)=>{
             if(response.data!="user already exists"){
                 setcheck(true);
-                try {
+               try {
       const response = await axios.post(
         "https://chitchat2.onrender.com/api/log",  // Ensure correct backend URL
         { email, password },
@@ -99,6 +99,7 @@ const Auth = () => {
           headers: { "Content-Type": "application/json" }
         }
       );
+  
       setuserinfo(response.data.user);  // Update state
       navigate("/profile");  // Redirect after successful login
      await setcheck(true); 
@@ -106,7 +107,6 @@ const Auth = () => {
       console.error("Login failed:", err.response?.data?.error || err.message);
       setlogerr(true);
     }
-  };
              }
           else{
             userexists();
