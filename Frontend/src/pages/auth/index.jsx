@@ -87,10 +87,10 @@ const Auth = () => {
             password: password,
           }, {
             headers: { 'Content-Type': 'application/json' },
-          }).then((response)=>{
+          }).then(async(response)=>{
             if(response.data!="user already exists"){
                 setcheck(true);
-                fetchUser()
+                await fetchUser()
               navigate("/profile");  // Redirect after successful login
              }
           else{
