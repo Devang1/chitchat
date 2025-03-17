@@ -11,8 +11,7 @@ const Auth = () => {
     const[logerr,setlogerr]=useState(false);
     const[password,setpassword]=useState("");
     const[cpassword,setcpassword]=useState("");
-    const{userinfo,setuserinfo}=useappstore();
-    const{check,setcheck}=useappstore();
+    const{userinfo,setuserinfo,check,setcheck}=useappstore();
     const navigate=useNavigate();
     useEffect(()=>{
         const checkKarlo=async()=>{
