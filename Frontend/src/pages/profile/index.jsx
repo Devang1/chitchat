@@ -40,7 +40,7 @@ const Profile = () => {
       formData.append("last", last);
       formData.append("gender", gender);
       formData.append("userinfo", JSON.stringify(userinfo));
-      const info = await axios.post("/api/profile", formData, {
+      const info = await axios.post("https://chitchat2.onrender.com/api/profile", formData, {
         withCredentials: true, // Allows session cookies
         headers: {
           "Content-Type": "multipart/form-data", // Important for file uploads
@@ -102,7 +102,7 @@ const Profile = () => {
     setfirst(userinfo.firstname);
     setlast(userinfo.lastname);
     setgender(userinfo.gender);
-    setImage(`/api/image/${userinfo.id}`)
+    setImage(`https://chitchat2.onrender.com/api/image/${userinfo.id}`)
     const imageFile = new File([userinfo.image], "image.png", { type: "image/png" });
     setSelectedFile(imageFile);
     console.log(userinfo);
