@@ -75,15 +75,7 @@ const Profile = () => {
       reader.readAsDataURL(file);
     }
   };
-  useEffect(()=>{
-    const checkKarlo=async()=>{
-      console.log(check)
-      if(check==false){
-          navigate("/auth");
-      }
-  }
-  checkKarlo();
-  },[userinfo,navigate,check]);
+
  const  handlenavigate=()=>{
     if(userinfo.profilesetup==true){
       navigate("/chat");
