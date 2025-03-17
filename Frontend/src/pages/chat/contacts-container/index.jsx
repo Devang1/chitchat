@@ -101,7 +101,7 @@ function ContactsContainer() {
           {contacts.length>0?(contacts.map((chat, index) => (
             <li key={index} className="p-2 bg-gray-800 rounded-xl hover:bg-cyan-400/20 transition flex items-center gap-2" onClick={()=>{handelContactClick(chat)}}>
               <img src={chat.image? `https://chitchat2.onrender.com/api/image/${chat.id}`:chat.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
-              <strong className="text-cyan-300 ">{`${chat.firstname} ${chat.lastname!=null?chat.lastname:""}`}</strong>
+              <strong className="text-cyan-300 ">{`${chat.firstname} ${(chat.lastname!=null || chat.lastname!="null")?chat.lastname:""}`}</strong>
             </li>
           ))):<h1>User not found</h1>}
         </ul>
