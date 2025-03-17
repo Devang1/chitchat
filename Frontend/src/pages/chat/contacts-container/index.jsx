@@ -70,8 +70,7 @@ function ContactsContainer() {
   },[channel,getchannels]);
   useEffect(() => {
     setcontacts([]);
-    setcontacts(Totalcontacts.filter((contact) => contact.firstname?.startsWith(search)));
-    setContacts(Totalcontacts.filter((contact) =>contact.firstname && contact.firstname.toLowerCase().startsWith(search.toLowerCase()))
+    setcontacts(Totalcontacts.filter((contact) =>contact.firstname && contact.firstname.toLowerCase().startsWith(search.toLowerCase()))
 );
 
   }, [search,Totalcontacts]);
