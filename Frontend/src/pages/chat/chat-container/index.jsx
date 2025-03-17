@@ -39,7 +39,7 @@ function ChatContainer() {
     }
   },[emojiref])
   let defaultimg=selectedChatData.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
-  let tempimageUrl = selectedChatData.image? `/api/image/${selectedChatData.id}`:defaultimg;
+  let tempimageUrl = selectedChatData.image? `https://chitchat2.onrender.com/api/image/${selectedChatData.id}`:defaultimg;
   const handleSendMessage=()=>{
     if(message!=""){
       if(selectedChatType==="direct"){
@@ -84,14 +84,14 @@ function ChatContainer() {
   }
   useEffect(()=>{
     const getrecentimages=async()=>{
-      const response = await axios.post('/api/getImages', {
+      const response = await axios.post('https://chitchat2.onrender.com/api/getImages', {
         sender:userinfo.id,
         reciever:selectedChatData.id,
       });
       setimages(response.data);
     }
     const getrecentchannelimages=async()=>{
-      const response = await axios.post('/api/getChannelImages', {
+      const response = await axios.post('https://chitchat2.onrender.com/api/getChannelImages', {
         channel:selectedChatData.channel_id,
       });
       setimages(response.data);
@@ -104,14 +104,14 @@ function ChatContainer() {
   },[selectedChatMessages,selectedChatData,userinfo,selectedChatType])
   useEffect(() => {
     const handleGetMessages=async()=>{
-      const response = await axios.post('/api/getMessages', {
+      const response = await axios.post('https://chitchat2.onrender.com/api/getMessages', {
         sender:userinfo.id,
         reciever:selectedChatData.id,
       });
       setselectedChatMessages(response.data)
     }
     const handleGetChannelMessages=async()=>{
-      const response = await axios.post('/api/getchannelMessages', {
+      const response = await axios.post('https://chitchat2.onrender.com/api/getchannelMessages', {
         channel:selectedChatData.channel_id,
       });
       setselectedChatMessages(response.data)
@@ -163,7 +163,7 @@ function ChatContainer() {
     console.log("File Selected:", data.secure_url); // Logs the correct file object
     try {
       if(selectedChatType==="direct"){
-      const info = await axios.post("/api/postfile", {
+      const info = await axios.post("https://chitchat2.onrender.com/api/postfile", {
         file: data.secure_url,
         sender: userinfo.id,
         content:"",
@@ -175,7 +175,7 @@ function ChatContainer() {
       console.log("File uploaded successfully:", info.data);
     }
     else if(selectedChatType==="channel"){
-      const info = await axios.post("/api/postchannelfile", {
+      const info = await axios.post("https://chitchat2.onrender.com/api/postchannelfile", {
         file: data.secure_url,
         sender: userinfo.id,
         content:"",
