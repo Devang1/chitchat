@@ -8,13 +8,12 @@ import { Toaster, toast } from 'sonner';
 function ChatContainer() {
   const emojiref=useRef();
   const socket=useSocket();
-  const {userinfo}=useappstore();
   const [emojipicker,setemojipicker]=useState(false);
   const [message, setMessage] = useState("");
   const [imgclick, setimgclick] = useState("");
   const [images, setimages] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  const{channel,setchannel}=useappstore();
+  const{channel,setchannel,userinfo,selectedChatData,closeChat,selectedChatMessages,selectedChatType,setselectedChatMessages}=useappstore();
   const handelemoji=(emoji)=>{
     setMessage((msg)=>msg+emoji.emoji);
   }
@@ -39,7 +38,6 @@ function ChatContainer() {
       document.removeEventListener("mousedown",handelclickoutside);
     }
   },[emojiref])
-  const {selectedChatData,closeChat,selectedChatMessages,selectedChatType,setselectedChatMessages} =useappstore();
   let defaultimg=selectedChatData.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
   let tempimageUrl = selectedChatData.image? `/api/image/${selectedChatData.id}`:defaultimg;
   const handleSendMessage=()=>{
