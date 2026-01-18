@@ -21,7 +21,7 @@ export const SocketProvider = ({ children }) => {
     if (userinfo && !socket.current) {
       console.log("Connecting socket for user:", userinfo);
 
-      socket.current = io("http://localhost:3000", {
+      socket.current = io(`${import.meta.env.VITE_API_URL || "http://localhost:3000"}`, {
         withCredentials: true,
         query: { userid: userinfo.id },
       });
