@@ -1,14 +1,29 @@
 import {Server as socketIOserver} from "socket.io"
 import env from "dotenv";
 import pg from "pg";
+const { Pool } = pg;
 env.config();
-const db = new pg.Client({
-  user:process.env.PG_USER,
-  host:process.env.PG_HOST,
-  database:process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT
-});
+let db;
+if (process.env.DATABASE_URL) {
+  // ✅ Neon / Production
+  db = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
+  console.log("Connected to Neon PostgreSQL");
+} else {
+  // ✅ Local PostgreSQL
+  db = new Pool({
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    password: process.env.PG_PASSWORD,
+    port: process.env.PG_PORT,
+  });
+  console.log("Connected to Local PostgreSQL");
+}
 db.connect();
 const setupSocket=(server)=>{
     const io=new socketIOserver(server,{
