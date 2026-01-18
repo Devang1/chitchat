@@ -13,7 +13,7 @@ db.connect();
 const setupSocket=(server)=>{
     const io=new socketIOserver(server,{
         cors:{
-            origin:"http://localhost:5173",
+            origin:["http://localhost:5173", "http://localhost:5174"]||process.env.ORIGIN,
             methods:["GET","POST"],
             credentials:true
         }

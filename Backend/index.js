@@ -23,9 +23,10 @@ const port=process.env.PORT||3000;
 const saltRounds = 10;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 env.config();
+const { Pool } = pg;
 app.use(
   cors({
-    origin:"http://localhost:5173"||process.env.ORIGIN,
+    origin:["http://localhost:5173", "http://localhost:5174"]||process.env.ORIGIN,
     methods:["GET","POST","PUT","PATCH","DELETE"],
     credentials:true,
   })
@@ -42,13 +43,28 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 const upload = multer({ storage: multer.memoryStorage() });
-const db = new pg.Client({
-  user:process.env.PG_USER,
-  host:process.env.PG_HOST,
-  database:process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT
-});
+
+let db;
+if (process.env.DATABASE_URL) {
+  // ✅ Neon / Production
+  db = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
+  console.log("Connected to Neon PostgreSQL");
+} else {
+  // ✅ Local PostgreSQL
+  db = new Pool({
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    password: process.env.PG_PASSWORD,
+    port: process.env.PG_PORT,
+  });
+  console.log("Connected to Local PostgreSQL");
+}
 db.connect();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -241,6 +257,7 @@ app.get("/api/logout", (req, res) => {
   app.post("/api/register",async(req,res)=>{
   const email = req.body.email;
   const password = req.body.password;
+  console.log(email)
     try {
       const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
         email,
@@ -273,7 +290,6 @@ app.post("/api/log", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return res.status(500).json({ error: "Internal Server Error" });
     if (!user) return res.status(401).json({ error: "Invalid credentials" });
-
     req.logIn(user, (loginErr) => {
       if (loginErr) return res.status(500).json({ error: "Login failed" });
       return res.json({ message: "Login successful", user });
