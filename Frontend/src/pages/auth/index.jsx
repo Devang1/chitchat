@@ -67,7 +67,8 @@ const Auth = () => {
     };
         const fetchUser = async () => {
           try {
-            await axios.get('/api/isAuth', {
+             const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+            await axios.get(`${BASE_URL}/api/isAuth`, {
               withCredentials: true, 
             }).then((response)=>{
                 console.log(response.data);
@@ -85,8 +86,8 @@ const Auth = () => {
         event.preventDefault();
 
         if(email!=""&&password!="" && password===cpassword){
-          
-      axios.post("/api/register",{
+          const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      axios.post(`${BASE_URL}/api/register`,{
             email: email,
             password: password,
           }, {
@@ -111,8 +112,9 @@ const Auth = () => {
 const handleLogin = async (event) => {
     event.preventDefault();
     try {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
       const response = await axios.post(
-        "/api/log",  // Ensure correct backend URL
+        `${BASE_URL}/api/log`,  // Ensure correct backend URL
         { email, password },
         { 
           withCredentials: true,  // Allows session cookies
@@ -120,7 +122,7 @@ const handleLogin = async (event) => {
         }
       );
   
-      setuserinfo(response.data.user);  // Update state
+      await setuserinfo(response.data.user);
       navigate("/profile");  // Redirect after successful login
       setcheck(true); 
     } catch (err) {
@@ -132,7 +134,8 @@ const handleLogin = async (event) => {
 
     const handleGoogle=(event)=>{
         event.preventDefault();
-        window.location.href = '/api/auth/google';
+        const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+        window.location.href = `${BASE_URL}/api/auth/google`;
        console.log( fetchUser());
     }
   return (

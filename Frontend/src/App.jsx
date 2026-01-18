@@ -89,7 +89,8 @@ function App() {
   const {userinfo,setuserinfo}=useappstore();
   useEffect(()=>{
     const getuser=async()=>{
-      const user=await axios.get('/api/isAuth', {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const user=await axios.get(`${BASE_URL}/api/isAuth`, {
         withCredentials: true, 
       })
       console.log(user.data)

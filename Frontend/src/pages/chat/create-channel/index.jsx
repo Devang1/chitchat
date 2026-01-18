@@ -7,9 +7,11 @@ export default function GroupCreator() {
   const [search, setSearch] = useState("");
   const [allcontacts, setAllcontacts] = useState([]);
   const{channel,setchannel}=useappstore();
+  const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
   const {userinfo} =useappstore();
   const getcontacts=async()=>{
-    const fetched_contacts=await axios.get('/api/contacts', {
+    const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const fetched_contacts=await axios.get(`${BASE_URL}/api/contacts`, {
       params: { email:userinfo.email },
       withCredentials: true, 
     })
@@ -27,14 +29,15 @@ export default function GroupCreator() {
   };
 
   const handleCreateGroup = () => {
-    axios.post("/api/group",{
+    const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+    axios.post(`${BASE_URL}/api/group`,{
       name:groupName ,
       admin: userinfo.id,
     }, {
       headers: { 'Content-Type': 'application/json' },
     }).then((response)=>{
       selectedUsers.map((mem)=>(
-      axios.post("/api/addmember",{
+      axios.post(`${BASE_URL}/api/addmember`,{
         group:response.data.channel_id,
         member:mem,
       },{
@@ -82,7 +85,7 @@ export default function GroupCreator() {
               onChange={() => toggleUser(user.id)}
               className="accent-[#00bcd4]"
             />
-            <img src={user.image? `/api/image/${user.id}`:user.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
+            <img src={user.image? `${import.meta.env.VITE_API_URL}/api/image/${user.id}`:user.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
             <strong className="text-cyan-300 ">{`${user.firstname} ${user.lastname!=null?user.lastname:""}`}</strong>
           </label>
         ))}

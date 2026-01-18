@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect,useState,useCallback } from "react";
 import { Toaster, toast } from 'sonner';
 import axios from "axios";
+const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
 function ContactsContainer() {
   const navigate=useNavigate();
   const {userinfo,setselectedChatType,selectedChatType,setselectedChatData} =useappstore();
@@ -14,7 +15,8 @@ function ContactsContainer() {
   const{channel,setchannel,closeChat}=useappstore();
   const[channels,setchannels]=useState([]);
   const logout=async()=>{
-    await axios.get('/api/logout', {
+    const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+    await axios.get(`${BASE_URL}/api/logout`, {
       withCredentials: true, 
     }).then((response)=>{
       if(response.data=="logout"){
@@ -29,7 +31,8 @@ function ContactsContainer() {
   };
   const getcontacts = useCallback(async () => {
     try {
-      const fetched_contacts = await axios.get("/api/contacts", {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const fetched_contacts = await axios.get(`${BASE_URL}/api/contacts`, {
         params: { email: userinfo.email },
         withCredentials: true,
       });
@@ -41,7 +44,8 @@ function ContactsContainer() {
   }, [userinfo.email]); 
   const getchannels = useCallback(async () => {
     try {
-      const fetched_channels = await axios.get("/api/getchannels", {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const fetched_channels = await axios.get(`${BASE_URL}/api/getchannels`, {
         params: { member: userinfo.id },
         withCredentials: true,
       });
@@ -60,7 +64,7 @@ function ContactsContainer() {
   }
   useEffect(()=>{
     let defaultimg=userinfo.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
-    let tempimageUrl = userinfo.image? `/api/image/${userinfo.id}`:defaultimg;
+    let tempimageUrl = userinfo.image? `${import.meta.env.VITE_API_URL}/api/image/${userinfo.id}`:defaultimg;
     setimageUrl(tempimageUrl);
   },[userinfo]);
   useEffect(()=>{
@@ -75,7 +79,8 @@ function ContactsContainer() {
     setcontacts(Totalcontacts.filter((contact) => contact.firstname.startsWith(search)));
   }, [search,Totalcontacts]);
   const deleteChannel=async(channel)=>{
-    const response=axios.post("/api/deletechannel",{
+    const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const response=axios.post(`${BASE_URL}/api/deletechannel`,{
       channelId:channel
     }, {
       headers: { 'Content-Type': 'application/json' },
@@ -102,7 +107,7 @@ function ContactsContainer() {
         <ul className="mt-4 space-y-2 overflow-y-scroll  h-[30vh] ">
           {contacts.length>0?(contacts.map((chat, index) => (
             <li key={index} className="p-2 bg-gray-800 rounded-xl hover:bg-cyan-400/20 transition flex items-center gap-2" onClick={()=>{handelContactClick(chat)}}>
-              <img src={chat.image? `/api/image/${chat.id}`:chat.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
+              <img src={chat.image? `${import.meta.env.VITE_API_URL}/api/image/${chat.id}`:chat.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash"} alt="User" className="w-10 h-10 rounded-full" />
               <strong className="text-cyan-300 ">{`${chat.firstname} ${chat.lastname!=null?chat.lastname:""}`}</strong>
             </li>
           ))):<h1>User not found</h1>}

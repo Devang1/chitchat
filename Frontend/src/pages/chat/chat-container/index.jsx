@@ -28,6 +28,7 @@ function ChatContainer() {
       },
     });
   };
+  const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
   useEffect(()=>{
     const handelclickoutside=(event)=>{
       if(emojiref.current && !emojiref.current.contains(event.target)){
@@ -41,7 +42,7 @@ function ChatContainer() {
   },[emojiref])
   const {selectedChatData,closeChat,selectedChatMessages,selectedChatType,setselectedChatMessages} =useappstore();
   let defaultimg=selectedChatData.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
-  let tempimageUrl = selectedChatData.image? `/api/image/${selectedChatData.id}`:defaultimg;
+  let tempimageUrl = selectedChatData.image? `${import.meta.env.VITE_API_URL}/api/image/${selectedChatData.id}`:defaultimg;
   const handleSendMessage=()=>{
     if(message!=""){
       if(selectedChatType==="direct"){
@@ -86,14 +87,16 @@ function ChatContainer() {
   }
   useEffect(()=>{
     const getrecentimages=async()=>{
-      const response = await axios.post('/api/getImages', {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const response = await axios.post(`${BASE_URL}/api/getImages`, {
         sender:userinfo.id,
         reciever:selectedChatData.id,
       });
       setimages(response.data);
     }
     const getrecentchannelimages=async()=>{
-      const response = await axios.post('/api/getChannelImages', {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const response = await axios.post(`${BASE_URL}/api/getChannelImages`, {
         channel:selectedChatData.channel_id,
       });
       setimages(response.data);
@@ -113,7 +116,8 @@ function ChatContainer() {
       setselectedChatMessages(response.data)
     }
     const handleGetChannelMessages=async()=>{
-      const response = await axios.post('/api/getchannelMessages', {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const response = await axios.post(`${BASE_URL}/api/getchannelMessages`, {
         channel:selectedChatData.channel_id,
       });
       setselectedChatMessages(response.data)
@@ -165,7 +169,8 @@ function ChatContainer() {
     console.log("File Selected:", data.secure_url); // Logs the correct file object
     try {
       if(selectedChatType==="direct"){
-      const info = await axios.post("/api/postfile", {
+        const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const info = await axios.post(`${BASE_URL}/api/postfile`, {
         file: data.secure_url,
         sender: userinfo.id,
         content:"",
@@ -177,7 +182,8 @@ function ChatContainer() {
       console.log("File uploaded successfully:", info.data);
     }
     else if(selectedChatType==="channel"){
-      const info = await axios.post("/api/postchannelfile", {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const info = await axios.post(`${BASE_URL}/api/postchannelfile`, {
         file: data.secure_url,
         sender: userinfo.id,
         content:"",
@@ -277,7 +283,7 @@ function ChatContainer() {
                 <div className="my-4 relative" key={index}>
                 <div
                   key={index}
-                  className={`p-2  my-2 max-w-[19vw] h-auto flex items-center justify-center  ${
+                  className={`md:p-2 p-1 max-w-[40vw] my-2 md:max-w-[19vw] h-auto flex items-center justify-center md:py-2 md:px-2 ${
                     msg.sender === userinfo.id
                       ? "ml-auto bg-cyan-600"
                       : "bg-gray-700"

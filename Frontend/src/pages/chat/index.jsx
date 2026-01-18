@@ -23,7 +23,7 @@ const Chat = () => {
   },[userinfo,navigate,check]);
   const {selectedChatType} =useappstore();
   const defaultimg=userinfo.gender=="Male"?"https://avatar.iran.liara.run/public/boy?username=Ash":"https://avatar.iran.liara.run/public/girl?username=Ash";
-  const imageUrl = userinfo.image? `/api/image/${userinfo.id}`:defaultimg ;
+  const imageUrl = userinfo.image? `${import.meta.env.VITE_API_URL}/api/image/${userinfo.id}`:defaultimg ;
     return (
       <div className="flex h-[100vh] text-white overflow-hidden ">
         <ContactsContainer/>

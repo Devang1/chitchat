@@ -40,7 +40,8 @@ const Profile = () => {
       formData.append("last", last);
       formData.append("gender", gender);
       formData.append("userinfo", JSON.stringify(userinfo));
-      const info = await axios.post("/api/profile", formData, {
+      const BASE_URL =import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const info = await axios.post(`${BASE_URL}/api/profile`, formData, {
         withCredentials: true, // Allows session cookies
         headers: {
           "Content-Type": "multipart/form-data", // Important for file uploads
@@ -77,7 +78,7 @@ const Profile = () => {
   };
   useEffect(()=>{
     const checkKarlo=async()=>{
-      console.log(check)
+      console.log(check, userinfo.profilesetup)
       if(check==false){
           navigate("/auth");
       }
@@ -102,9 +103,11 @@ const Profile = () => {
     setfirst(userinfo.firstname);
     setlast(userinfo.lastname);
     setgender(userinfo.gender);
-    setImage(`/api/image/${userinfo.id}`)
+    if(userinfo.image){
+    setImage(`${import.meta.env.VITE_API_URL}/api/image/${userinfo.id}`)
     const imageFile = new File([userinfo.image], "image.png", { type: "image/png" });
     setSelectedFile(imageFile);
+  }
   },[]);
     return (
       <div className="w-[100vw] h-[100vh] flex flex-col gap-10 items-center justify-center bg-[#121212] relative md:flex-row md:gap-60">
